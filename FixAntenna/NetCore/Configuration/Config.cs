@@ -19,6 +19,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Security;
 
 namespace Epam.FixAntenna.NetCore.Configuration
 {
@@ -1007,6 +1008,13 @@ namespace Epam.FixAntenna.NetCore.Configuration
 		/// </summary>
 		[DefaultValue("")]
 		public const string SslPort = "sslPort";
+		
+		/// <summary>
+		/// Optional custom TLS certificate validation callback. If set, it overrides the built-in
+		/// certificate validation in ConnectionAuthenticator for both client and server validation paths.
+		/// Signature matches SslStream's RemoteCertificateValidationCallback.
+		/// </summary>
+		public RemoteCertificateValidationCallback CustomRemoteCertificateValidationCallback { get; set; }
 		#endregion
 
 		/// <summary>

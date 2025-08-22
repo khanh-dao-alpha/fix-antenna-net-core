@@ -306,6 +306,15 @@ namespace Epam.FixAntenna.NetCore.FixEngine.Transport
 
 		private bool ClientValidationCallback(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
 		{
+			if (_configAdapter.Configuration.CustomRemoteCertificateValidationCallback != null)
+			{
+				return _configAdapter.Configuration.CustomRemoteCertificateValidationCallback(
+					sender, 
+					certificate,
+					chain,
+					sslPolicyErrors);
+			}
+
 			return VerifyRemoteCertificate(chain, certificate, sslPolicyErrors, ClientOid);
 		}
 
